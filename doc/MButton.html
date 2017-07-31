@@ -1,0 +1,60 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  MButton</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  MButton</H1>
+<P>
+<P>
+Derived from:  <b>public MView, public BButton</B>
+<P>
+Declared in:  <b>&lt;MButton.h&gt;</B>
+<P>
+<HR>
+<H2><A NAME="Overview"><FONT SIZE=6>O</FONT>verview</A></H2>
+<P>
+An MButton is a BButton which has been adapted to be a part of layoutlib, and has been enhanced in such a way that it doesn't keep the window locked if you keep the button pressed. In all other respects,
+an MButton works just like a BButton. For further information about BButtons, you are encouraged to read the BeBook.
+<P>
+<HR>
+<H2><A NAME="Constructor and Destructor"><FONT SIZE=6>C</FONT>onstructor and <FONT SIZE=6>D</FONT>estructor</A></H2>
+<P>
+<HR>
+<H3><A NAME="MButton()">MButton()</A></H3>
+<P>
+<PRE>
+      MButton(const char *<I>label</I>, BMessage <I>*message</I>, BHandler <I>*target</I>=NULL, minimax <I>size</I>=minimax(-1,-1,65536,65536,1))
+      MButton(const char *<I>label</I>, ulong <I>ID</I>, minimax <I>size</I>=minimax(-1,-1,65536,65536,1))
+</PRE>
+<P>
+Initializes an MButton that will display the label <I>label</I>.<BR>
+The first form of the constructor will assign the model <I>message</I> to the button, and set up the <I>target</I> BHandler as the target for this message.<BR>
+The second form of the constructor will create a BMessage(M_BUTTON_SELECTED), which will contain a pointer to the button (whose name is defined by the constant M_BUTTON_POINTER), and an int32 (called M_BUTTON_ID)
+that has the value <I>ID</I>. <BR>
+The MButton's size can be constrained with the <I>size</I> argument.
+<P>
+When the button has been activated and it's time to call BInvoker::Invoke(), MButton will add a boolean called
+M_DOUBLECLICK to the message. When this boolean is true, the button was doubleclicked.
+It also adds an int32 called M_BUTTON_MASK to the message, which indicates with which mousebuttons the MButton
+was clicked.
+<P>
+<B>See also:  </B>the BButton constructor.
+<P>
+<HR>
+<H3><A NAME="~MButton()">~MButton()</A></H3>
+<P>
+<P>
+<PRE>
+      virtual ~MButton(void)</PRE>
+<P>
+<P>
+Cleans up after the MButton.
+<P>
+<hr>
+<br>
+<p>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

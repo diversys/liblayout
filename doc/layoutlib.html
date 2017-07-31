@@ -1,0 +1,82 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  Introduction</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  Introduction</H1>
+Library: <B>liblayout.so</B>
+<P>
+The layout-library is a library of classes, which together allow you to easily make fully resizable and font-sensitive GUI's. It does this by giving standard Be-classes a little more knowledge about themselves, and adding some custom classes that do the actual layout-work.<P>
+
+<HR>
+<H2><A NAME="Overview"><FONT SIZE=6>O</FONT>verview</A></H2>
+<P>
+At the base of the library are two classes: <B>minimax</B> and <B>MView</B>.
+<P>
+The MView class is an abstract class that declares the <B>layout</B> and <B>layoutprefs</B> methods. Through these methods, an MView-derived class is able to tell the world about its preferred sizes, and the world is able to tell the MView-derived class to go resize itself to a certain size and position.<P>
+<P>
+The minimax class is a class that is used to store an MView's minimum and maximum size (hence the name). It also stores the relative weight of the MView. Each MView has a minimax-member called <I>mpm</I>, which reflects the current minimum and maximum size. There is also a minimax-member called <I>ct_mpm</I> which is a copy of the size specified at construction time. The layoutprefs() function will recalculate mpm based on ct_mpm and the
+current font-settings. If you want to manually change the size-constraints after construction, you should
+therefore alter the ct_mpm member.<BR>
+
+<P>
+All classes that participate in the layout-system must derive from MView, and implement the layout and layoutprefs members. Depending on the function of the class, these implementations can be very complex, or very simple, like so:<PRE>minimax MyClass::layoutprefs()
+{
+	return mpm;
+}
+
+BRect MyClass::layout(BRect rect)
+{
+	ResizeTo(rect.Width(),rect.Height());
+	MoveTo(rect.LeftTop());
+	return rect;
+}
+</PRE>
+The above would be used to implement the layout and layoutprefs members of a class with no constraints as
+to its minimum and maximum sizes. Note that the class also derives from BView, from where it obtains the ResizeTo() and MoveTo() members.
+<P>
+<HR>
+<H2><A NAME="Grouping"><FONT SIZE=6>G</FONT>rouping and non-grouping classes</A></H2>
+<P>
+Some of the classes in the library have as their only purpose in life to group other classes together. The ones you'll use most frequently are the <B>HGroup</B> and <B>VGroup</B> classes, but there are also grouping classes that group together MViews using tabviews, or merely add a border around MViews.<P>
+There is an abstract base-class for grouping classes called <B>MGroup</B>. Although an MGroup simply derives
+from MView, it is recommended that when you create your own grouping classes, you derive them from MGroup. By doing this, you make sure that other classes recognize your class as being a grouping class.
+Non grouping classes are usually the controls that you interact with, like buttons, checkboxes and sliders.
+<P>
+<HR>
+<H2><A NAME="howitworks"><FONT SIZE=6>H</FONT>ow it works</A></H2>
+<P>
+To build a fully resizable GUI, you create a tree of objects. At the root of the tree is a grouping class, the nodes in the tree also consist of grouping classes, and the leaves of the tree are the controls you interact with.<P>
+A simple example is:<PRE>MView *topview=new VGroup
+               (
+                   new HGroup
+                   (
+                       new MButton("upper left corner"),
+                       new MButton("upper right corner"),
+                       0
+                   ),
+                   new MButton("along the bottom"),
+                   0
+               );
+</PRE>
+The above defines a group of three buttons. Two of those buttons are aranged in a row along the top, with each button getting half of the available space. The third button is placed at the bottom, below the other two buttons.
+<P>
+Some things to keep in mind:
+<UL>
+<LI> you can place a non-grouping class at the root of the tree. This will give you a window with only one control in it.
+<LI> certain grouping classes can be interacted with as well. The TabGroup-class for example, which is used to create tabbed groups of controls, but also implements the tabs themselves.
+</UL>
+<P>
+Once you have built the tree, you add it to a window, and call the <B>layoutprefs</B> member of the root-MView. This causes the internal states of all the MViews to be initialised.<BR>
+When you are ready to display the GUI on screen, you call the <B>layout</B> member of the root-MView. This will cause all grouping classes to determine how much space they have, and layout themselves and their children accordingly.<BR>
+Note that you only need to call <B>layoutprefs</B> once (unless you add items to the tree later on, in which case you have to call it again), but that you have to call <B>layout</B> everytime the window gets resized.
+Typically, you'll use an MWindow-object to do this for you. If you decide not to use MWindow (although I can't imagine why you'd do that), you'll call the layout() function from the FrameResized() of your window.
+<P>
+<hr>
+<br>
+<p>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

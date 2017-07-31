@@ -1,0 +1,6 @@
+These are some simple applications to help you get started
+using liblayout. They don't actually do anything useful, they
+just display windows with stuff in them. For an example that
+ actually does something, please refer to the SoundPlay
+plugin SDK, which contains sourcecode for a "mixer" plugin
+that uses liblayout for its UI.

@@ -1,0 +1,54 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  MCheckBox</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  MCheckBox</H1>
+<P>
+<P>
+Derived from:  <b>public MView, public BCheckBox</B>
+<P>
+Declared in:  <b>&lt;MCheckBox.h&gt;</B>
+<P>
+<HR>
+<H2><A NAME="Overview"><FONT SIZE=6>O</FONT>verview</A></H2>
+<P>
+An MCheckBox is a BCheckBox which has been adapted to be a part of layoutlib. In all other respects,
+an MCheckBox works just like a BCheckBox. For further information about BCheckBox's, you are encouraged to read the BeBook.
+<P>
+<HR>
+<H2><A NAME="Constructor and Destructor"><FONT SIZE=6>C</FONT>onstructor and <FONT SIZE=6>D</FONT>estructor</A></H2>
+<P>
+<HR>
+<H3><A NAME="MCheckBox()">MCheckBox()</A></H3>
+<P>
+<PRE>
+      MCheckBox(const char *<I>label</I>, BMessage <I>*message</I>, BHandler <I>*target</I>=NULL, bool <I>state</I>=false)
+      MCheckBox(const char *<I>label</I>, ulong <I>ID</I>, bool <I>state</I>=false)
+</PRE>
+<P>
+Initializes an MCheckBox that will display the label <I>label</I>.<BR>
+The first form of the constructor will assign the model <I>message</I> to the checkbox, and set up the <I>target</I> BHandler as the target for this message.<BR>
+The second form of the constructor will create a BMessage(M_CHECKBOX_SELECTED), which will contain a pointer to the checkbox (whose name is defined by the constant M_CHECKBOX_POINTER_NAME), and an int32 (called M_CHECKBOX_ID_NAME) that has the value <I>ID</I>. <BR>
+The initial state of the MCheckBox can be set with the <I>state</I> argument.
+<P>
+<B>See also:  </B>the BCheckBox constructor.
+<P>
+<HR>
+<H3><A NAME="~MCheckBox()">~MCheckBox()</A></H3>
+<P>
+<P>
+<PRE>
+      virtual ~MCheckBox(void)</PRE>
+<P>
+<P>
+Cleans up after the MCheckBox.
+<P>
+<hr>
+<br>
+<p>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

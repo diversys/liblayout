@@ -1,0 +1,68 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  Questions & Answers</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  Questions & Answers</H1>
+Library: <B>liblayout.so</B>
+<P>
+
+<H4>Liblayout feels a little slow. Why?</H4>
+<P>
+Liblayout uses a BView for every control and group, and using
+lots of BViews slows down the windowing system somewhat. As of
+R4 resizing speed has been improved somewhat, but complex windows
+may still feel a little sluggish on slow machines.<BR>
+Counterquestion: do you spend much time resizing windows?
+<P>
+<H4>Why does the rotating volume-button (MVolume class) have two operating modes?</H4>
+<P>
+Because I like the "linear" behaviour (which is the default), while others
+expect the "radial" behaviour. The mode that a user prefers seems to be based
+mostly on past experiences with application utilising such buttons. As people
+from many different backgrounds have embraced the BeOS, it seemed like a good
+idea to allow users to customize the behaviour of this nonstandard button.
+<P>
+<H4>Why does the tabbed view have two different appearances?</H4>
+<P>
+The "full width" mode was the original mode. Don't ask me why, it's just how I
+implemented it. Other people who made tabbed views seemed to prefer a
+left-aligned display, so I added two lines of code to make this possible as
+well.
+<P>
+<H4>Why can each window have a different set of fonts?</H4>
+<P>
+There are three system-wide font-settings for "plain", "bold" and "fixed" font,
+which are supposed to apply to applications throughout the system. In practice,
+the "Terminal" application is the first application to break with this, since it
+uses its own setting, instead of using the default fixed font. Also, there is
+another setting (settable with another application, no less) for the menu-font.
+But I digress...<BR>
+The reason that each window can have a different setting is the existence of
+FontSelector. The first version of FontSelector could only broadcast fontchanges
+to the entire system. A later version added to ability to drag-and-drop fonts.
+When dropping a font onto a window of an application, it proved to be
+counter-intuitive to let that change apply to the entire application, changing
+the font for <I>all</I> windows of the application. That's why it is now
+possible to drop a font onto a window of a liblayout-application, and have only
+the font for that particular window change.
+<P>
+<H4>Isn't liblayout starting to be like MUI?</H4>
+<P>
+I don't think so.<BR>
+The goal of liblayout is not to make the GUI totally customizable. I
+will add configurability where it makes sense, but don't expect to be able to
+have scroll-lists with background-patterns, and buttons that look like they
+were carved from marble (note: as of R4, BeOS provides a standard mechanism for
+using images as backgrounds for views).<BR>
+The goal of liblayout was and is to make it easier for developers to create
+font-sensitive and resizable GUI's.
+<P>
+<hr>
+<br>
+<p>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

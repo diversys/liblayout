@@ -1,0 +1,100 @@
+<HTML><HEAD>
+<TITLE>The Layout Library: TabGroup</TITLE></HEAD><BODY BGCOLOR=#FFFFFF><P>
+<HR>
+<H1>The Layout Library: TabGroup</H1>
+<P><P>Derived from: <B>public MGroup, public BControl</B>
+<P>
+Declared in: <B>&ltTabGroup.h&gt</B>
+<P>
+<HR>
+<H2><A NAME="Overview"><FONT SIZE=6>O</FONT>verview</A></H2><P>
+The TabGroup is class that can contain multiple children, but
+displays only one of them at a time. The user can choose which
+one by clicking on the corresponding tab at the top of the TabGroup.
+<P>
+<HR>
+<H2><A NAME="Constructor and Destructor"><FONT SIZE=6>C</FONT>onstructor and <FONT SIZE=6>D</FONT>estructor</A></H2><P>
+<HR>
+<H3><A NAME="TabGroup()">TabGroup()</A></H3>
+<P>
+<PRE>
+    TabGroup(minimax mpm,char *arg=0 ...)
+    TabGroup(char *arg=0 ...)
+    TabGroup(BMessage*)
+</PRE>
+The arguments presented to the constructor are an optional <I>minimax</I> structure, followed by alternating pairs of char* and MView*. The char* will be the label
+of the tab, and the following MView* will be the MView that's activated by this
+tab. The list should be NULL-terminated.<BR>
+You can add or remove tabs after the TabGroup has been created, by using AddChild and RemoveChild. The label of the tab will be the name of the added view.
+<HR>
+<H3><A NAME="~TabGroup()">~TabGroup()</A></H3>
+<P>
+<PRE>
+    virtual ~TabGroup()
+</PRE>
+Cleans up after the TabGroup
+<HR>
+<H2><A NAME="Static Functions"><FONT SIZE=6>S</FONT>tatic <FONT SIZE=6>F</FONT>unctions</A></H2><P>
+<P>
+<HR>
+<!-- =========================================================================== -->
+<H3><A NAME="Instantiate()">Instantiate()</A></H3>
+<PRE>
+    static BArchivable *Instantiate(BMessage *archive)
+</PRE>
+Not yet implemented
+<P>
+<HR>
+<H2><A NAME="Member Functions"><FONT SIZE=6>M</FONT>ember <FONT SIZE=6>F</FONT>unctions</A></H2><P>
+<P>
+<HR>
+<!-- =========================================================================== -->
+<H3><A NAME="ActivateTab()">ActivateTab()</A></H3>
+<PRE>
+    virtual void ActivateTab(int index)
+</PRE>
+Activates the tab at index <I>index</I>.
+<P>
+<P>
+<HR>
+<!-- =========================================================================== -->
+<H3><A NAME="Archive()">Archive()</A></H3>
+<PRE>
+    virtual long Archive(BMessage *archive, bool deep=true) const
+</PRE>
+Not yet implemented
+<P>
+<P>
+<HR>
+<!-- =========================================================================== -->
+<H3><A NAME="KeyDown()">KeyDown()</A></H3>
+<PRE>
+    virtual void KeyDown(const char *bytes, int32 numbytes)
+</PRE>
+Augments BControl::KeyDown to allow navigating from tab to tab.
+<P>
+<P>
+<HR>
+<!-- =========================================================================== -->
+<H3><A NAME="MouseDown()">MouseDown()</A></H3>
+<PRE>
+    virtual void MouseDown(BPoint point)
+</PRE>
+Overrides the BControl version of MouseDown, to handle the activation of tabs
+with the mouse.
+<P>
+<P>
+<HR>
+<!-- =========================================================================== -->
+<H3><A NAME="SetEnabled()">SetEnabled()</A></H3>
+<PRE>
+    virtual void SetEnabled(bool enabled)
+</PRE>
+Disables or enables the TabGroup. Currently, when the TabGroup is disabled, this means that its tabs can no longer be operated, but the controls contained in the tab are not affected. This behaviour may change in the future.
+<P>
+<P>
+<HR>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</BODY>
+</HTML>

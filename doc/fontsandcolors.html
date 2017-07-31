@@ -1,0 +1,56 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  Fonts and Color</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  Fonts and Color</H1>
+<P>
+<BR>
+<BR>
+<BR>
+<BR>
+<P>
+The MView and MGroup already contain code that will handle dynamic font and color changes. You only
+need to implement your own handling for some special cases.
+<HR>
+<H2><A NAME="font"><FONT SIZE=6>F</FONT>ont <FONT SIZE=6>C</FONT>hanges</A></H2>
+<P>
+To handle your own fontchanges, you should implement the <B>reloadfont()</B> function.
+This function is defined as:
+<PRE>
+    void reloadfont(BFont *font[])
+</PRE>
+
+The array that is passed to this functions contains pointers to the default
+plain, bold and fixed font for the window containing the object. The object
+must pick the appropriate entry from the array, using the M_PLAIN_FONT,
+M_BOLD_FONT and M_FIXED_FONT constants as an index into the array. The default
+implementation for an MView will use font[M_PLAIN_FONT], and the default for an
+MGroup is to use font[M_BOLD_FONT].<BR>
+If the M_NO_FONT_CHANGES bit in the flags field is set, the MView will not
+change its own font, but will still call reloadfont() for its children.<P>
+reloadfont() is called for you from the MWindow object when it receives notification that the font has changed.
+<P>
+<HR>
+<H2><A NAME="color"><FONT SIZE=6>C</FONT>olor <FONT SIZE=6>C</FONT>hanges</A></H2>
+<P>
+To handle your own colorchanges, you should implement the <B>setcolor()</B> function.
+This function is defined as:
+<PRE>
+    void setcolor(rgb_color color, bool deep=true)
+</PRE>
+
+The default implementation of this function will copy <I>color</I> to MView::FILL_COLOR, and recalculate
+MView::HI_COLOR and MView::LOW_COLOR accordingly. If <I>deep</I> is set to true, it will also call the 
+setcolor() function of its children (if any). If the M_NO_COLOR_CHANGES bit in the flags field is set,
+the MView will not change its own color, but will still call setcolor() for its children.<P>
+setcolor() is called for you from the MWindow class when the user drops a color from, for example, roColour or BeatWater
+Painter on the window.
+
+<HR>
+<P>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

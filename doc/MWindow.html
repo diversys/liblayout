@@ -1,0 +1,72 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  MWindow</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  MWindow</H1>
+<P>
+<P>
+Derived from:  <b>public BWindow</B>
+<P>
+Declared in:  <b>&lt;MWindow.h&gt;</B>
+<P>
+<HR>
+<H2><A NAME="Overview"><FONT SIZE=6>O</FONT>verview</A></H2>
+<P>
+An MWindow is really just a BWindow, even the constructor is exactly the same. The only difference between
+an MWindow and a BWindow is that an MWindow handles the resizing of its content for you, as well as
+color-drops from roColour and Beatware Painter.<BR>
+If you derive from MWindow and implement your own MessageReceived, remember to call inherited::MessageReceived().
+<P>
+<HR>
+<H2><A NAME="Data Member"><FONT SIZE=6>D</FONT>ata <FONT SIZE=6>M</FONT>embers</A></H2>
+<P>
+ulong flags
+<UL>
+The <I>flags</I> member is used to customize the behaviour of the MWindow. The following
+flags are defined (and can be logically OR'ed together):<BR>
+<B>M_USE_CALCULATED_MINX</B> The minimum width of the window equals the minimum width of the top view. Set by default.<BR>
+<B>M_USE_CALCULATED_MINY</B> The minimum height of the window equals the minimum height of the top view. Set by default.<BR>
+<B>M_USE_CALCULATED_MAXX</B> The maximum width of the window equals the maximum width of the top view.<BR>
+<B>M_USE_CALCULATED_MAXY</B> The maximum height of the window equals the maximum height of the top view.<BR>
+<B>M_WIN_AUTORESIZE</B> The MWindow will make sure its first child fills the entire window. Set by default.<BR>
+</UL>
+<HR>
+An MWindow will normally determine its size-limits from the limits of its first view. If you unset the M_WIN_AUTORESIZE flag, you must do a number of things yourself:<UL>
+	<LI> you must make sure that the highest-level MViews are MBorders
+	<LI> you must set the resizing mode of the MBorders
+	<LI> if the resizing mode is not B_FOLLOW_NONE, you must set the B_FRAME_EVENTS flag of these MBorders
+	<LI> you must give the MBorders an initial size and position in the window
+	<LI> <B>you must calculate and set the window's size-limits yourself.</B>
+</UL><P>
+For example, to use a layoutable view in a document window with scrollbars, you would do something like:<pre>   mwindow->AddChild(mborder);
+   mwindow->flags&=(~M_WIN_AUTORESIZE);
+   mborder->SetResizingMode(B_FOLLOW_ALL);
+   mborder->SetFlags(bview->Flags()|B_FRAME_EVENTS);
+   minimax limit=topview->layoutprefs();
+   mwindow->SetSizeLimits(limit.mini.x+B_V_SCROLL_BAR_WIDTH,1E6,limit.mini.y+B_H_SCROLL_BAR_HEIGHT,1E6);
+   BRect wb=mwindow->Bounds();
+   mborder->ResizeTo(wb.Width()-B_V_SCROLL_BAR_WIDTH,wb.Height()-B_H_SCROLL_BAR_HEIGHT);</pre>
+Note that the same technique can be used to put layoutable views in a plain BWindow, and to have multiple layoutable 
+classes as direct descentdants of a window. You should set the window-limits <B>before</B> calling Show(), so the Show()
+can validate the current window-size against the imposed limits, and adjust the size if required.
+</UL>
+<HR>
+<H2><A NAME="Constructor and Destructor"><FONT SIZE=6>C</FONT>onstructor and <FONT SIZE=6>D</FONT>estructor</A></H2>
+<P>
+<HR>
+<H3><A NAME="MWindow()">MWindow()</A></H3>
+<P>
+(I might get around to explaining the constructor here, but until then, use the BeBook: the constructor
+for an MWindow equals that of a BWindow, and an MWindow is functionally equivalent to a BWindow (except that
+it knows how to resize its contents, and knows what to do when you drop a color on it from roColour or
+Beatware Painter).
+<P>
+<hr>
+<br>
+<p>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

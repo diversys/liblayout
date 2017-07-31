@@ -1,0 +1,70 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  MPictureButton</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  MPictureButton</H1>
+<P>
+<P>
+Derived from:  <b>public MView, public BPictureButton</B>
+<P>
+Declared in:  <b>&lt;MPictureButton.h&gt;</B>
+<P>
+<HR>
+<H2><A NAME="Overview"><FONT SIZE=6>O</FONT>verview</A></H2>
+<P>
+An MPictureButton is liblayout's version of BPictureButton. Like MButton, it
+works asynchronous, meaning is does not keep the window
+locked when you keep the mousebutton pressed down on it. It serves as a base-class for MRew, MPlayBW, MStop, MPlayFW, MFFWD
+and MEject.
+<P>
+<HR>
+<H2><A NAME="Constructor and Destructor"><FONT SIZE=6>C</FONT>onstructor and <FONT SIZE=6>D</FONT>estructor</A></H2>
+<P>
+<HR>
+<H3><A NAME="MPictureButton()">MPictureButton()</A></H3>
+<P>
+<PRE>
+      MPictureButton(minimax <I>size</I>,
+         BPicture *<I>off</I>, 
+         BPicture *<I>on</I>, 
+         BMessage *<I>message</I> = NULL, 
+         BHandler *<I>target</I> = NULL, 
+         uint32 <I>behavior</I> = B_ONE_STATE_BUTTON) 
+</PRE>
+<P>
+Since the size of a picture cannot be determined, you <B>must</B> specify
+a size for this control, and this size should be <B>fixed</B>.
+You specify the pictures for the pressed/unpressed state with the <I>on</I>
+and <I>off</I> arguments. You can specify the <I>message</I> that the control
+should send when clicked, as well as a <I>target</I> for this message.
+Finally, you can set the <I>behavior</I> to either B_ONE_STATE_BUTTON
+or B_TWO_STATE_BUTTON. A one-state button displays the <I>off</I> image
+normally and the <I>on</I> image to highlight the button when it's clicked.
+A two-state button toggles between the <I>off</I> image and the <I>on</I> image
+<P>
+When the button has been activated and it's time to call BInvoker::Invoke(), MPictureButton will add a boolean called
+M_DOUBLECLICK to the message. When this boolean is true, the button was doubleclicked.<BR>
+It also adds an int32 called M_BUTTON_MASK to the message, which indicates with which mousebuttons the MPictureButton
+was clicked.
+<P>
+<B>See also:  </B>the BPictureButton constructor.
+<P>
+<HR>
+<H3><A NAME="~MPictureButton()">~MPictureButton()</A></H3>
+<P>
+<P>
+<PRE>
+      virtual ~MPictureButton(void)</PRE>
+<P>
+<P>
+Cleans up after the MPictureButton.
+<P>
+<hr>
+<br>
+<p>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

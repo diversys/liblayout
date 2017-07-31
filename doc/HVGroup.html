@@ -1,0 +1,56 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  HGroup and VGroup</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  HGroup and VGroup</H1>
+<P>
+<P>
+Derived from:  <b>public MGroup, public BView</B>
+<P>
+Declared in:  <b>&lt;HGroup.h&gt;</B> and <B>&lt;VGroup.h&gt;</B>
+<P>
+<HR>
+<H2><A NAME="Overview"><FONT SIZE=6>O</FONT>verview</A></H2>
+<P>
+HGroup and VGroup are classes that are used to group other MView-derived classes together. An HGroup aligns all of its children in a horizontal row, while a VGroup aligns them in a vertical column. HGroups and VGroups can be nested to achieve a more complex layout.
+<P>
+<HR>
+<H2><A NAME="Constructor and Destructor"><FONT SIZE=6>C</FONT>onstructor and <FONT SIZE=6>D</FONT>estructor</A></H2>
+<P>
+<HR>
+<H3><A NAME="HGroup() and VGroup()">HGroup() and VGroup()</A></H3>
+<P>
+<PRE>
+	  HGroup(MView <I>*kid</I>, ...)
+	  HGroup(minimax <I>size</I>, MView <I>*kid</I>, ...)
+	  VGroup(MView <I>*kid</I>, ...)
+	  BGroup(minimax <I>size</I>, MView <I>*kid</I>, ...)
+</PRE>
+<P>
+Adds all of the listed <I>kid</I>s to the HGroup or VGroup. The list of MViews must be terminated with a NULL pointer.<BR>
+The HGroup or VGroup will determine its own minimum and maximum size by querying all of the children for their minimum and maximum sizes, and adding them up.<BR>
+The <I>size</I> argument can be used to further constrain the size of the
+HGroup or VGroup.  The <I>size</I> given will not cause any child-MViews to be
+compressed smaller than their minimum sizes.
+
+<P>
+<HR>
+<H3><A NAME="~HGroup() and VGroup()">~HGroup() and VGroup()</A></H3>
+<P>
+<P>
+<PRE>
+      virtual ~HGroup();
+      virtual ~VGroup()</PRE>
+<P>
+<P>
+Cleans up after the HGroup and VGroup.
+<P>
+<hr>
+<br>
+<p>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

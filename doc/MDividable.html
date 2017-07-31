@@ -1,0 +1,69 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  MDividable</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  MDividable</H1>
+<P>
+<P>
+Derived from:  <b>none</B>
+<P>
+Declared in:  <b>&lt;MDividable.h&gt;</B>
+<P>
+<HR>
+<H2><A NAME="Overview"><FONT SIZE=6>O</FONT>verview</A></H2>
+<P>
+An MDividable is an abstract class that provides an interface for aligning objects that can be "divided". Currently this includes
+MTextControl, Mpopup and SpinButton, all of which have a label on the left, and a data-entry part on the right.<P>
+<P>
+<HR>
+<H2><A NAME="Constructor and Destructor"><FONT SIZE=6>C</FONT>onstructor and <FONT SIZE=6>D</FONT>estructor</A></H2>
+<P>
+<HR>
+MDividable is a trivial class, and therefore has a trivial (default) constructor and destructor.
+<P>
+<hr>
+<H2><A NAME="Data Member"><FONT SIZE=6>D</FONT>ata <FONT SIZE=6>M</FONT>embers</A></H2>
+MDividable *rolemodel
+<P>
+If <I>rolemodel</I> is non-NULL, the control should use <I>rolemodel</I>'s LabelWidth() as its own. If on the other
+hand <I>rolemodel</I> is NULL, it should use its own preferred labelwidth.
+<P>
+<hr>
+<H2><A NAME="Member Functions"><FONT SIZE=6>M</FONT>ember <FONT SIZE=6>F</FONT>unctions</A></H2>
+<hr>
+<H3>DivideSameAs()</H3>
+<P>
+<pre>void DivideSameAs(MDividable *dividable)</pre>
+<P>
+With this function you tell the MDividable that it should use the same division between label and data as the
+given MDividable <I>dividable</I>.
+You will not normally call this function directly, but will instead call the global <A HREF="#DivideSame">
+DivideSame()</A> function instead.
+<hr>
+<H3>LabelWidth()</H3>
+<P>
+<pre>virtual float LabelWidth()=0</pre>
+<P>
+This function must be implemented by classes derived from MDividable, and should return the width of the label
+part of the object.
+<hr>
+<H2><A NAME="Global Functions"><FONT SIZE=6>G</FONT>lobal <FONT SIZE=6>F</FONT>unctions</A></H2>
+<hr>
+<H3><A NAME="DivideSame">DivideSame()</A></H3>
+<P>
+<pre>void DivideSame(MView *div1, MDividable *div2, ...)</pre>
+<P>
+This global function is a convenient shortcut for calling DivideSame on all objects you want to align.
+It takes a NULL-terminated list of MViews (which should also be MDividables), and will align them
+so that the seperation between label and data-entry part is the same for all objects. If you change the label
+of one of the objects later on, you should call this function again.
+<hr>
+<P>
+<br>
+<p>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

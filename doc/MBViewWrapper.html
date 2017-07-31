@@ -1,0 +1,63 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  MBViewWrapper</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  MBViewWrapper</H1>
+<P>
+<P>
+Derived from:  <b>public MView, public BView</B>
+<P>
+Declared in:  <b>&lt;MBViewWrapper.h&gt;</B>
+<P>
+<HR>
+<H2><A NAME="Overview"><FONT SIZE=6>O</FONT>verview</A></H2>
+<P>
+An MBViewWrapper is a wrapper-class for a standard BView. By attaching a standard 
+BView to an MBViewWrapper, the BView can participate in the layout-process, without
+being a layoutable class itself.<BR>
+Although this is a simple method of making <I>any</I> BView participate, it does have
+one disadvantage: it adds a little more overhead, as there are now two BViews (the wrapper and your own BView), where there would otherwise have been only one.
+<P>
+<HR>
+<H2><A NAME="Constructor and Destructor"><FONT SIZE=6>C</FONT>onstructor and <FONT SIZE=6>D</FONT>estructor</A></H2>
+<P>
+<HR>
+<H3><A NAME="MBViewWrapper()">MBViewWrapper()</A></H3>
+<P>
+<PRE>
+      MBViewWrapper(BView *<I>bview</I>, bool <I>usepreferred</I>=true, bool <I>x_fixed</I>=true, bool <I>y_fixed</I>=true)
+</PRE>
+<P>
+Initializes an MBViewWrapper that will contain the BView <i>view</I><BR>
+If <I>usepreferred</I> is true, <I>view</I> will be queried through its <B>GetPreferredSize()</I> memberfunction for its preferred size. This size will be used as the minimum
+size. If <I>usepreferred</I> is false, then the minimum size of <I>view</I> will be
+equal to the size with which it was constructed.<BR>
+If <I>x_fixed</I> is true <B>and <I>bview's</I>resizing mode does not include B_FOLLOW_LEFT_RIGHT</B>, the size of the object will be fixed in the horizontal
+direction, and will be equal to its minimum size.<BR>
+If <I>y_fixed</I> is true <B>and <I>bview's</I>resizing mode does not include B_FOLLOW_TOP_BOTTOM</B>, the size of the object will be fixed in the vertical
+direction, and will be equal to its minimum size.
+<P>
+<B>Note that the x_fixed and y_fixed arguments are essentially obsolete. If you use their
+default values, you can control the resizing behaviour of the view by setting its 
+resizing mode.</B>
+
+<P>
+<HR>
+<H3><A NAME="~MBViewWrapper()">~MBViewWrapper()</A></H3>
+<P>
+<P>
+<PRE>
+      virtual ~MBViewWrapper(void)</PRE>
+<P>
+<P>
+Cleans up after the MBViewWrapper.
+<P>
+<hr>
+<br>
+<p>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

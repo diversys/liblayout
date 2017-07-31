@@ -1,0 +1,85 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  PropGadget</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  PropGadget</H1>
+<P>
+<P>
+Derived from:  <b>public MView, public BControl</B>
+<P>
+Declared in:  <b>&lt;PropGadget.h&gt;</B>
+<P>
+<HR>
+<H2><A NAME="Overview"><FONT SIZE=6>O</FONT>verview</A></H2>
+<P>
+A PropGadget implements a two-dimensional slider. Because it is two-dimensional, it can be used either as a horizontal slider, a vertical slider, or both at
+the same time.
+<P>
+<HR>
+<H2><A NAME="Constructor and Destructor"><FONT SIZE=6>C</FONT>onstructor and <FONT SIZE=6>D</FONT>estructor</A></H2>
+<P>
+<HR>
+<H3><A NAME="PropGadget()">PropGadget()</A></H3>
+<P>
+<PRE>
+      PropGadget(float <I>xprop</I>,float <I>xval</I>,float <I>yprop</I>,float <I>yval</I>, 
+           BBitmap *<I>knobimage</I>=NULL, void (*<I>callback</I>)(PropGadget*,void*,float,float)=NULL,
+           void *<I>arg</I>=NULL,
+           long <I>extraspacing</I>=0)
+</PRE>
+<P>
+Initializes the PropGadget.<BR>
+<I>xprop</I> and <I>yprop</I> are the relative size of the knob in the horizontal and vertical direction: if xprop is 0.5 for example,
+the slider-knob will occupy half the slider's width. To make a one-dimensional slider, set the proportion for the other dimension to zero.
+Setting xprop to 0, for example, will create a vertical slider. <I>xprop</I> and <I>yprop</I> are also the amount that the slider
+is adjusted when you click next to the knob.<BR>
+<I>xval</I> and <I>yval</I> are the initial values of the slider.<BR>
+<I>knobimage</I> is the bitmap that will be used to draw the knob. When a bitmap is specified, <I>xprop</I> and <I>yprop</I> no
+longer determine the size of the knob. In this case, the size of the knob is fixed, and equal to the size of the bitmap. The PropGadget
+does not copy the bitmap, it is your responsibility to allocate and delete it.<BR>
+The <I>callback</I> function is called whenever the user manipulates the slider. The function receives a pointer to the PropGadget
+as its first argument, it receives the <I>arg</I> pointer as its second argument, and the current x- and y-values as its third and
+fourth arguments.<BR>
+<I>extraspacing</I> is the amount that the actual slider is inset from its BView's frame. Use this if you draw your own background,
+and need to have some space available to draw a border around the slider.
+<P>
+<HR>
+<H3><A NAME="~PropGadget()">~PropGadget()</A></H3>
+<P>
+<P>
+<PRE>
+      virtual ~PropGadget(void)</PRE>
+<P>
+<P>
+Cleans up after the PropGadget.
+<P>
+<hr>
+<H2><A NAME="Member Functions"><FONT SIZE=6>M</FONT>ember <FONT SIZE=6>F</FONT>unctions</A></H2>
+<P>
+<HR>
+<H3>DrawContainer()</H3>
+<PRE>
+	virtual void DrawContainer(BRect knob)
+</PRE>
+This function draws the background of the slider. The size and position of the knob is passed in as a BRect. When this function
+is called, the clipping region has already been set to include only the area that needs updating.
+The default version of this function draws a background in the current FILL_COLOR.
+<br>
+<p>
+<HR>
+<H3>DrawKnob()</H3>
+<PRE>
+	virtual void DrawKnob(BRect knob)
+</PRE>
+This function draws the slider-knob. The size and position of the knob is passed in as a BRect. The default version of this function
+draws the bitmap given in the constructor, or a black rectangle if no bitmap was specified.
+<br>
+<P>
+<HR>
+<p>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

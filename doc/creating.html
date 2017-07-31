@@ -1,0 +1,121 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  Creating your own classes</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  Creating your own classes</H1>
+<P>
+<BR>
+<BR>
+<BR>
+<BR>
+<P>
+To create your own classes that will be able to work with the layout-library, your classes
+must derive from both MView and BView. You must implement the <B>layoutprefs</B> and <B>layout</B> members of the MView class.<BR>
+If your classes require any special handling with regard to colors, you should also implement the setcolor() function. Similarly, if your class does anything special with fonts, you should implement the reloadfont() function. Both these functions are explained in the <A HREF="fontsandcolors.html">Fonts & Colors</A> chapter.
+<P>
+<HR>
+<H2><A NAME="layoutcontrols"><FONT SIZE=6>C</FONT>reating your own layoutable classes</A></H2>
+<P>
+Through the layoutprefs-function, you tell the system about the minimum and maximum size
+of your class.<BR>
+The grouping classes guarantee that your object will not be asked to become smaller
+than the size you give as the minimum size. Note that this guarantee is currently enforced
+by making the minimum window-size equal to the minimum size of the root-MView. If you do not respect
+the minimum size of a grouping class, then the grouping class will not respect the minimum size
+of the MViews it contains.
+<P>
+The grouping classes also guarantee that your object will not be asked to become larger than the maximum
+size. If the available space is larger, your object will be centered in the available space.<BR>
+If you want to have <I>all</I> the available space, even if it is bigger than the "maximum" size, you
+should set the <B>M_USE_FULL_SIZE</B> bit in the <I>flags</I> member of MView. This feature is mostly intended
+for grouping classes, but other classes may benefit from it as well.
+<P>
+The layoutprefs-function is defined as:
+<PRE>
+    minimax layoutprefs(void)
+</PRE>
+and the <I>minimax</I> class is defined as:
+<PRE>
+class minimax
+{
+struct xypair { float x,y;};
+
+   public:  xypair   mini;
+            xypair   maxi;
+            float   weight;
+            
+            minimax(int minx=0,int miny=0,
+                  int maxx=1E5,int maxy=1E5,
+                  float wght=1);
+};
+</PRE>
+where the <I>mini</I> and <I>maxi</I> members are used to store the minimum and maximum
+size of the object.<BR>
+The <i>weight</I> member is used to give each object a weight relative to its siblings.
+If two objects, A and B,  are in a group, and A has a weight of 2, and B has a weight of
+1, then A will get twice as much space as B (provided this doesn't conflict with the
+minimum and maximum sizes). The default weight of an MView is 1, meaning all MViews get
+an equal share of the available space.<P>
+NOTE: the minimum and maximum sizes are specified as the number of pixels that the object
+is wide or high. An object where mpm.mini.x=mpm.maxi.x=mpm.mini.y=mpm.maxi.y=10 will be
+10 pixels wide and 10 pixels high. Its Bounds() rectangle will therefore be (0,0,9,9).
+<P>
+<HR>
+<P>
+Through the <B>layout</B> function, your class is asked to layout itself. Again, if you
+have correctly setup the window-limits to be the limits of the root-MView, then it is
+guaranteed that your object will not be asked to resize to a size that's smaller than 
+its minimum size, or bigger than its maximum size.<P>
+<P>
+The layout-function is defined as:
+<PRE>
+   <B>BRect layout(BRect size)</B>
+</PRE>
+The <i>size</I> parameter determines where the object should be placed in its parent.
+A simple implementation of the layout function will simply do<PRE>BRect MyClass::layout(BRect rect) 
+{ 
+        ResizeTo(rect.Width(),rect.Height()); 
+        MoveTo(rect.LeftTop()); 
+        return rect; 
+}</PRE>
+The layout function returns the amount of space actually used by the object.
+<P>
+<HR>
+<P>
+<H2><A NAME="groupingclasses"><FONT SIZE=6>C</FONT>reating your own grouping classes</A></H2>
+<P>
+To create your own grouping classes, you must take a little more responsibility.
+<UL>
+<LI> unlike standard controls, you must be prepared to deal with the situation where your object is
+asked to layout itself to a size that is larger than the maximum size (usually you will take the full size,
+and center your children in that space).
+<LI> you should derive from MGroup instead of MView. This will allow other classes to see that your class 
+is a grouping class.
+<LI> your layoutprefs() function must call all of its children's layoutprefs() function.
+<LI> your layout() function must call the layout() function of those children that are
+visible.
+<LI> your layout() function must respect all of its childrens's minimum and maximum size.
+<LI> your setcolor() function must call of its children's setcolor() function (the default implementation does this already).
+<LI> your reloadfont() function must call of its children's reloadfont() function (the default implementation does this already).
+</UL>
+Otherwise, writing a grouping class is just like writing a 'leaf' class.
+<HR>
+<H2><A NAME="commonmistakes"><FONT SIZE=6>C</FONT>ommon mistakes</A></H2>
+<P>
+Some things to remember, to prevent some common mistakes:
+<UL>
+<LI> <B>Always</B> create your classes by deriving from MView <B>first</B>. (e.g. class myclass: public MView, public someotherclass)
+<LI> Always create your classes with a resizingmode of B_FOLLOW_NONE.
+<LI> In layoutprefs(), calculate mpm from ct_mpm and any other constraints you might have. This is especially important when using an MSplitter, since it will adjust ct_mpm.weight of its sibling classes.
+<LI> In grouping classes, call the children's layoutprefs() and layout().
+<LI> If you derive from MApplication or MWindow, make sure to call the inherited version of MessageReceived for any messages you don't handle yourself.
+<LI> If your classes have non-standard colors, be sure to include M_NO_COLOR_CHANGES in the MView-flags.
+<LI> If your classes have non-standard fonts, be sure to include M_NO_FONT_CHANGES in the MView-flags.
+</UL>
+<HR>
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

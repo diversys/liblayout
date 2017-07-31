@@ -1,0 +1,61 @@
+<HTML><HEAD>
+<TITLE>The Layout Library:  MGroup</TITLE>
+</HEAD><BODY BGCOLOR=#FFFFFF>
+<P>
+<HR>
+<H1>The Layout Library:  MGroup</H1>
+<P>
+<P>
+Derived from:  <b>public MView</B>
+<P>
+Declared in:  <b>&lt;MGroup.h&gt;</B></B>
+<P>
+<HR>
+<H2><A NAME="Overview"><FONT SIZE=6>O</FONT>verview</A></H2>
+<P>
+MGroup is an abstract base class for grouping classes. It is main purpose in life
+is to make it possible to determine whether a particular MView is a group, by testing
+if the object is a kind of MGroup.
+<BR>
+All grouping classes should derive from MGroup instead of directly from MView.
+<P>
+<HR>
+<H2><A NAME="Constructor and Destructor"><FONT SIZE=6>C</FONT>onstructor and <FONT SIZE=6>D</FONT>estructor</A></H2>
+<P>
+<HR>
+<H3><A NAME="MGroup()">MGroup()</A></H3>
+<PRE>
+	  MGroup()
+</PRE>
+<P>
+Adds M_USE_FULL_SIZE to the <I>flags</I>, indicating that this object may receive more
+space than its maximum size would normally allow.
+<P>
+<HR>
+<H3><A NAME="~MGroup()">~MGroup()</A></H3>
+<P>
+<P>
+<PRE>
+      virtual ~MGroup();</PRE>
+<P>
+<P>
+Cleans up after the HGroup and VGroup.
+<P>
+<hr>
+<H2><A NAME="Member Functions"><FONT SIZE=6>M</FONT>ember <FONT SIZE=6>F</FONT>unctions</A></H2> 
+<P> 
+<HR> 
+<H3><A NAME="reloadfont()">reloadfont()</A></H3> 
+<P> 
+<PRE>
+	virtual void reloadfont(BFont *font[]);</PRE>
+<P>
+Reloads the font for the MGroup object, using M_BOLD_FONT as the font-index.
+<br>
+<p>
+<HR> 
+ <p>Copyright &copy; 1997 Marco Nelissen (marcone@xs4all.nl)  All rights reserved.
+<p>Be, BeOS, BeBox, BeWare, GeekPort, the Be logo, the BeOS logo, roColour, Beatware and Beatware painter are trademarks or registered trademarks of their respective owners.
+</body>
+</html>
+

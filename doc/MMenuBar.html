@@ -1,0 +1,83 @@
+<HTML><HEAD>
+<TITLE>The Layout Library: MMenuBar</TITLE></HEAD><BODY BGCOLOR=#FFFFFF><P>
+<HR>
+<H1>The Layout Library: MMenuBar</H1>
+<P><P>Derived from: <B>public MView, public BMenuBar</B>
+<P>
+Declared in: <B>&ltMMenuBar.h&gt</B>
+<P>
+<HR>
+<H2><A NAME="Overview"><FONT SIZE=6>O</FONT>verview</A></H2><P>
+MMenuBar is liblayout's version of BMenuBar. If you want to use it as a window-menu, e.g. as the uppermost
+item in your window, add M_NO_Y_LEFTOVERS to the flags.
+<P>
+<HR>
+<H2><A NAME="Constructor and Destructor"><FONT SIZE=6>C</FONT>onstructor and <FONT SIZE=6>D</FONT>estructor</A></H2><P>
+<HR>
+<H3><A NAME="MMenuBar()">MMenuBar()</A></H3>
+<P>
+<PRE>
+    MMenuBar(menu_layout layout=B_ITEMS_IN_ROW)
+    MMenuBar(BMessage*)
+</PRE>
+Creates an MMenuBar with the specified layout.
+<HR>
+<H3><A NAME="~MMenuBar()">~MMenuBar()</A></H3>
+<P>
+<PRE>
+    virtual ~MMenuBar()
+</PRE>
+Cleans up after the MMenuBar.
+<HR>
+<H2><A NAME="Static Functions"><FONT SIZE=6>S</FONT>tatic <FONT SIZE=6>F</FONT>unctions</A></H2><P>
+<P>
+<HR>
+<!-- =========================================================================== -->
+<H3><A NAME="Instantiate()">Instantiate()</A></H3>
+<PRE>
+    static BArchivable *Instantiate(BMessage *archive)
+</PRE>
+Not yet implemented.
+<P>
+<HR>
+<H2><A NAME="Member Functions"><FONT SIZE=6>M</FONT>ember <FONT SIZE=6>F</FONT>unctions</A></H2><P>
+<P>
+<HR>
+<!-- =========================================================================== -->
+<H3><A NAME="Archive()">Archive()</A></H3>
+<PRE>
+    virtual long Archive(BMessage *archive, bool deep=true) const
+</PRE>
+Not yet implemented.
+<P>
+<P>
+<HR>
+<!-- =========================================================================== -->
+<H3><A NAME="AttachedToWindow()">AttachedToWindow()</A></H3>
+<PRE>
+    virtual void AttachedToWindow()
+</PRE>
+Implementation detail
+<P>
+<P>
+<HR>
+<!-- =========================================================================== -->
+<H3><A NAME="DetachedFromWindow()">DetachedFromWindow()</A></H3>
+<PRE>
+    virtual void DetachedFromWindow()
+</PRE>
+Implementation detail
+<P>
+<P>
+<HR>
+<!-- =========================================================================== -->
+<H3><A NAME="reloadfont()">reloadfont()</A></H3>
+<PRE>
+    virtual void reloadfont(BFont *font[])
+</PRE>
+Handles font-changes.
+<P>
+<P>
+<HR>
+</BODY>
+</HTML>

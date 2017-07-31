@@ -1,0 +1,7 @@
+File: Benaphore_10.zip
+Author: Matt Bogosian <mattb@columbia.edu>
+Release: 1.0 (Aug. 14th, 1997)
+Compatibility: PR
+Location: contrib/develop
+Description: A signal-safe implementation of a Benaphore.
+Notes: This is an implementation of a Benaphore class (see issue #26 of the Be Newsletter <http://www.be.com/aboutbe/benewsletter/Issue26.html> or the BeOS Kernel Kit API <http://www.be.com/documentation/be_book/kernel/sems.html#Benaphores). The API is similar to Chris Herborth's Benaphore class, with an added bonus of being signal-safe (which the original Benaphores were not).
